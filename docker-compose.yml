@@ -8,6 +8,8 @@ services:
       dockerfile: keycloak/Dockerfile
     depends_on:
       - keydb
+#    volumes:
+#      - ~/Documents/keycloak:/opt/keycloak
     network_mode: host
 
 

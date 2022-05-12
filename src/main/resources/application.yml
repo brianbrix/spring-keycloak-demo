@@ -1,7 +1,8 @@
 server:
   port: 8082
 keycloak:
-  auth-server-url: https://localhost:8443/auth
+  auth-server-url: https://localhost:8443
   realm: test
-  resource: auth-server
+  resource: SpringBootKeyCloak
   public-client: true
+  disable-trust-manager: true
