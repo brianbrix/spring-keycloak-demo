@@ -1,0 +1,2 @@
+FROM postgres:13.1-alpine
+COPY keycloak/init.sql /docker-entrypoint-initdb.d/

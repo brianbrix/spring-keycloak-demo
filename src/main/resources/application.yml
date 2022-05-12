@@ -1,0 +1,7 @@
+server:
+  port: 8082
+keycloak:
+  auth-server-url: https://localhost:8443/auth
+  realm: test
+  resource: auth-server
+  public-client: true

@@ -1,0 +1,48 @@
+version: '3.3'
+
+services:
+  keycloak:
+    container_name: keycloak
+    build:
+      context: .
+      dockerfile: keycloak/Dockerfile
+    depends_on:
+      - keydb
+    network_mode: host
+
+
+  keydb:
+    build:
+      context: .
+      dockerfile: keycloak/DBDockerfile
+    volumes:
+      - .:/docker-entrypoint-initdb.d/
+    container_name: keydb
+    environment:
+      - POSTGRES_USER=keycloak
+      - POSTGRES_PASSWORD=keycloak
+    ports:
+      - "5432:5432"
+    network_mode: host
+
+  app:
+    image: 'keycloak-demo:latest'
+    build:
+      context: .
+      dockerfile: APDockerfile
+    container_name: app
+    depends_on:
+      - keycloak
+    expose:
+      - 8082
+#    environment:
+#      - SPRING_DATASOURCE_URL=jdbc:postgresql://localhost:5432/musala_drone
+#      - SPRING_DATASOURCE_USERNAME=postgres_user
+#      - SPRING_DATASOURCE_PASSWORD=postgres_pass
+#      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+#      - SPRING_PROFILES_ACTIVE=live
+    volumes:
+      - ~/Documents:/user/local/Documents
+    network_mode: host
+
+#  docker rm -f $(docker ps -a -q)
