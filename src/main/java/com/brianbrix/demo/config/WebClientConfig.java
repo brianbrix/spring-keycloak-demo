@@ -15,6 +15,9 @@ import reactor.netty.http.client.HttpClient;
 import javax.net.ssl.SSLException;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * Webclient bean to disable trustmanager
+ */
 @Configuration
 public class WebClientConfig {
     private static final int TIMEOUT = 300;
@@ -25,7 +28,7 @@ public class WebClientConfig {
     public WebClient myWebClient(WebClient.Builder webClientBuilder) throws SSLException {
         SslContext sslContext = SslContextBuilder
                 .forClient()
-                .trustManager(InsecureTrustManagerFactory.INSTANCE)
+                .trustManager(InsecureTrustManagerFactory.INSTANCE)//disable trustmanager(this ignores all ssl errors)
                 .build();
         HttpClient client = HttpClient.create()
                 .option(ChannelOption.CONNECT_TIMEOUT_MILLIS, 300000)
