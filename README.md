@@ -15,3 +15,7 @@ The application is made up of majorly two services:
 - [ ] Role: user
 - [ ] User: user1
 - [ ] Client: SpringBootKeyCloak
+
+To get access_token: Make post request with json credentials to http://localhost:8082/token.
+
+To test the token received: make GET request to http://localhost:8082/api
