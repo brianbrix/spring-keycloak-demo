@@ -8,6 +8,9 @@ services:
       dockerfile: keycloak/Dockerfile
     depends_on:
       - keydb
+    environment:
+      KEYCLOAK_DISABLE_TRUST_MANAGER: "true"
+#      - PROXY_ADDRESS_FORWARDING=true
 #    volumes:
 #      - ~/Documents/keycloak:/opt/keycloak
     network_mode: host

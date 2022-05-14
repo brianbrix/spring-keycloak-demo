@@ -6,3 +6,4 @@ keycloak:
   resource: SpringBootKeyCloak
   public-client: true
   disable-trust-manager: true
+

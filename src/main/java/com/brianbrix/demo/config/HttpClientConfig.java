@@ -32,7 +32,7 @@ public class HttpClientConfig {
         HttpClient httpClient = HttpClients
                 .custom()
                 .setSSLContext(new SSLContextBuilder().loadTrustMaterial(null, TrustAllStrategy.INSTANCE).build())
-//                .setSSLHostnameVerifier(NoopHostnameVerifier.INSTANCE)
+                .setSSLHostnameVerifier(NoopHostnameVerifier.INSTANCE)
                 .build();
         return httpClient;
     }
