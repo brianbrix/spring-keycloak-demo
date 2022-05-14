@@ -6,6 +6,8 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.util.MultiValueMap;
+import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 import reactor.util.retry.Retry;
@@ -18,17 +20,17 @@ public class GenericWebClient<T, V> {
     private HttpHeaders createHeaders() {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
-        headers.setAccept(List.of((MediaType.APPLICATION_FORM_URLENCODED)));
+        headers.setAccept(List.of((MediaType.APPLICATION_JSON)));
 //        headers.set("Authorization", authToken);
         return headers;
     }
 
-    public T makeRequest(WebClient webClient, String base, String path, V req, Class<T> clazz)
+    public T makeRequest(WebClient webClient, String base, String path, MultiValueMap<String, String> req, Class<T> clazz)
     {
         return webClient.post()
                 .uri(base, builder -> builder.path(path).build())
                 .headers(httpHeaders -> httpHeaders.addAll(createHeaders()))
-                .bodyValue(req)
+                .body(BodyInserters.fromFormData(req))
                 .retrieve()
                 .onStatus(
                         HttpStatus::is4xxClientError,
