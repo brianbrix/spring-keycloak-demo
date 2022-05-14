@@ -15,6 +15,11 @@ import reactor.util.retry.Retry;
 import java.time.Duration;
 import java.util.List;
 
+/**
+ * Generic class to make requests using reactive webclient
+ * @param <T>- Output class Type
+ * @param <V>- Input class Type
+ */
 @Log4j2
 public class GenericWebClient<T, V> {
     private HttpHeaders createHeaders() {

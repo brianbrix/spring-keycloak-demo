@@ -11,9 +11,13 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.context.request.WebRequest;
 
 
-//@RequiredArgsConstructor
 record ErrorResponse(int statusValue, String message) {
 }
+
+/**
+ * Custom Exception handler for app controllers
+ * Returns custom message whenever the specified exception is thrown
+ */
 @Log4j2
 @ControllerAdvice
 public class CustomExceptionHandler {
